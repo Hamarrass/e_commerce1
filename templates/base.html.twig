@@ -180,10 +180,30 @@
 									<a class="nav-link active" aria-current="page" href="#">Home</a>
 								</li>
 							</ul>
-							<form class="d-flex" role="search">
-								<input class="form-control me-2" type="search" placeholder="chercher" aria-label="Search">
-								<button class="btn btn-outline-success" type="submit">Recherche</button>
-							</form>
+							{% if app.user %}
+								<ul class="navbar-nav  mb-2 mb-md-0 d-flex">
+									<li class="nav-item">
+										<a class="nav-link " aria-current="page" href="{{path('app_logout')}}">Deconnexion</a>
+									</li>
+								</ul>
+							{% else %}
+								<ul class=" navbar-nav  mb-2 mb-md-0 d-flex ">
+									<li class="nav-item">
+										<a class="nav-link " aria-current="page" href="{{path('app_login')}}">Connexion</a>
+									</li>
+								</ul>
+								<ul class=" navbar-nav  mb-2 mb-md-0 d-flex ">
+									<li class="nav-item">
+										<a class="nav-link " aria-current="page" href="{{path('app_register')}}">S'inscrire</a>
+									</li>
+								</ul>
+
+							{% endif %}
+
+							{# <form class="d-flex" role="search">
+															<input class="form-control me-2" type="search" placeholder="chercher" aria-label="Search">
+															<button class="btn btn-outline-success" type="submit">Recherche</button>
+														</form> #}
 						</div>
 					</div>
 				</nav>
