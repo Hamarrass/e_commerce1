@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProductController!{% endblock %}
+
+{% block stylesheets %}
+ <link  href="{{asset('/assets/css/footer.css')}}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+
+<h1 class="mt-4">produit</h1>
+
+<div class="row mt-5">
+       <div class="col-md-4">
+            <img src="/upload/{{product.imageProduct}}" alt="{{product.name}}" class="img-fluid product-image">
+       </div>
+       <div class="col-md-7">
+            <h5> {{product.name}}</h5>
+            <span class="product-subtitle"> {{product.subtitle}}</span>
+            <span class="product-subtitle"> {{(product.price/100) | number_format(2,'.','?') }} $ </span>
+            <hr>
+            <p>
+              {{product.description | raw}}
+            </p>
+            <a href="" class="btn btn-primary" > Ajouter au panier </a>
+       </div>
+
+</div>
+
+  
+
+{% endblock %}
