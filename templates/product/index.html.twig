@@ -1,29 +1,56 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Nos Produits{% endblock %}
+{% block title %}Nos Produits
+{% endblock %}
 
 {% block body %}
-<div class="row">
-    <div class="col-md-3">
-        <h4 class="mt-4">Chercher vos produits</h4>
-        {{ form(form) }}
-    </div>
-    <div class="col-md-9">
-        <h1 class="mt-4">Nos produits</h1>
-        <div class="row">
-            {% for product in products %}
-                <div class="col-md-4">
-                    <div class="text-center product-item">
-                        <a href="{{ path('app_product_item', {'slug': product.slug}) }}">
-                            <img src="/upload/{{ product.imageProduct }}" alt="{{ product.name }}" class="img-fluid product-image">
-                        </a>
-                        <h5>{{ product.name }}</h5>
-                        <span class="product-subtitle">{{ product.subtitle }}</span>
-                        <span class="product-subtitle">{{ (product.price / 100) | number_format(2, '.', ',') }} €</span>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-    </div>
-</div>
-{% endblock %}
+	<div class="row">
+		<div class="col-md-3">
+			<h4 class="mt-4">Chercher vos produits</h4>
+			{{ form(form) }}
+			</div>
+			<div class="col-md-9">
+				<h1 class="mt-4">Nos produits</h1>
+				<div class="row">
+					{% for product in products %}
+						<div class="col-md-4">
+							<div class="text-center product-item">
+								<a href="{{ path('app_product_item', {'id': product.id}) }}">
+									<img src="/upload/{{ product.imageProduct }}" alt="{{ product.name }}" class="img-fluid product-image">
+								</a>
+								<h5>{{ product.name }}</h5>
+								<span class="product-subtitle">{{ product.subtitle }}</span>
+								<span class="product-subtitle">{{ (product.price / 100) | number_format(2, '.', ',') }}
+									€</span>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+				<nav aria-label="Page navigation exemple">
+					<ul class="pagination">
+
+						{% if previous >= 0 %}
+							<li class="page_item">
+								<a href="{{path('app_product', app.request.query.all|merge({'offset' : previous })  )}}" class="page_link">
+									<span aria-hidden="true">&laquo;</span>
+									<span class="sr-only">Previous</span>
+								</a>
+							</li>
+						{% endif %}
+
+						{% if next < products|length %}
+
+							<li class="page_item">
+								<a href="{{path('app_product',{'offset' : next })}}" class="page_link">
+									<span aria-hidden="true">&laquo;</span>
+									<span class="sr-only">Next</span>
+								</a>
+							</li>
+						{% endif %}
+
+
+					</ul>
+				</nav>
+			</div>
+		</div>
+	{% endblock %}

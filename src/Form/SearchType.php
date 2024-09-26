@@ -43,7 +43,8 @@ class SearchType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Search::class,
             'method'=>'GET',
-            'crsf_protection'=>false
+            'crsf_protection'=>false,
+            'allow_extra_fields'=>true
         ]);
     }
 }

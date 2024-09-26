@@ -26,30 +26,23 @@ class ProductController extends AbstractController
         $form = $this->createForm(SearchType::class, $search);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-           $products = $this->productRepository->findBySearchFilter($search);
-        }
-        else {
-            $products = $this->entityManagerInterface->getRepository(Product::class)->findAll();
-        }
-        // Récupère toutes les catégories pour afficher dans le formulaire
-        // $categories = $this->entityManagerInterface->getRepository(Category::class)->findAll();
-        // dump($categories); // Debugging
-
-
+        $offset = max(0,$request->query->getInt('offset',0));
+        $products = $this->productRepository->findBySearchFilter($search,$offset);
+    
         // Récupère tous les produits
 
         return $this->render('product/index.html.twig', [
             'products' => $products,
             'form' => $form->createView(),
+            "previous"=>$offset - ProductRepository::ITEMS_PER_PAGE,
+            "next" =>min(count($products),$offset+ProductRepository::ITEMS_PER_PAGE)
         ]);
     }
 
-    #[Route('/nos-produits/{slug}', name: 'app_product_item')]
-    public function showProduct($slug): Response
+    #[Route('/nos-produits/{id}', name: 'app_product_item')]
+    public function showProduct($id): Response
     {
-        $product = $this->entityManagerInterface->getRepository(Product::class)->findOneBy(['slug' => $slug]);
-
+        $product = $this->entityManagerInterface->getRepository(Product::class)->findOneBy(['id' => $id]);
         return $this->render('product/showProduct.html.twig', [
             'product' => $product,
         ]);
