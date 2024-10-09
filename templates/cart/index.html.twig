@@ -1,7 +1,92 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CartController!{% endblock %}
+{% block title %}Hello CartController!
+{% endblock %}
 
 {% block body %}
-  {{dump(cart)}}
+
+	<h1 class="mt-5">
+		mon Panier</h1>
+
+
+	{% if cartProducts|length %}
+
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">product</th>
+					<th scope="col">Image</th>
+					<th scope="col">Quantité</th>
+					<th scope="col">prix</th>
+					<th scope="col">tottal</th>
+					<th scope="col"></th>
+				</tr>
+			</thead>
+			<tbody>
+				{% set total = null %}
+				{% for product in cartProducts %}
+					{% if product.product !=  null %}
+						<tr>
+							<th>{{product.product.name}}</th>
+							<th scope="col">
+								<img src="/upload/{{product.product.imageProduct}}" alt="{{product.product.name}}" height="30px" width="30px">
+							</th>
+
+							<td>
+								<a href="{{path("app_add_cart" ,{id : product.product.id})}}" style="color:black ; text-docoration:non">
+									<i class="fa-solid fa-plus"></i>
+								</a>
+								({{product.quantity}})
+								<a href="{{path("app_decrease_product_cart" ,{id : product.product.id})}}" style="color:black ; text-docoration:non">
+									<i class="fa-solid fa-minus"></i>
+								</a>
+							</td>
+							<td>
+								{{(product.product.price/100)| number_format(2,'.',',')}}
+							</td>
+							<td>{{ ((product.product.price * product.quantity)/100)| number_format(2,'.',',') }}</td>
+							<td>
+								<a href="{{path("app_delete_product_cart" ,{id : product.product.id})}}" style="color:black ; text-docoration:non">
+									<i class="fa-solid fa-trash"></i>
+								</a>
+							</td>
+						</tr>
+
+						{% set total = total + (product.product.price * product.quantity)/100 %}
+					{% endif %}
+
+				{% endfor %}
+			</tbody>
+		</table>
+
+		<div class="row">
+			<div class="col-md-3 offset-md-9">
+				<b>Nombre de produits :
+					{{ cartProducts | length}}
+				</b>
+				<br>
+				<b>Total de mon panier :
+				</b>
+				{{total|number_format(2,'.',',') }}
+				$
+				<br>
+			</div>
+
+			<div class="col-md-3 offset-md-9 btn-group">
+				<a href="{{path("app_remove_cart") }}" class="btn btn-danger w100 mt-4">
+					vider mon panier</a>
+				<a href="" class="btn btn-success w100 mt-4">
+					Valider mon panier</a>
+			</div>
+
+
+		</div>
+	{% else %}
+
+		<h3>Votre panier est vide
+		</h3>
+
+	{% endif %}
+
 {% endblock %}

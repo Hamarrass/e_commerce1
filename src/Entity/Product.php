@@ -122,4 +122,12 @@ class Product
 
         return $this;
     }
+
+
+
+    // public function __toString()
+    // {
+    //     // Par exemple, retourner le nom du produit ou tout autre champ que vous souhaitez afficher
+    //     return $this->name; // Assurez-vous que $name est une propriété définie dans la classe
+    // }
 }
