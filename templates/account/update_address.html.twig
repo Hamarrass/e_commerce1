@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Modifications des addresses 
+{% endblock %}
+
+{% block body %}
+
+
+	<a href="" class="btn btn-info btn-sm float-end">
+		Modifier  mon adresse
+	</a>
+	<br/>
+	<a href="{{path('app_account_address')}}">
+		Retour
+	</a>
+	<hr>
+{% include "account/_form.html.twig" %}
+</div>
+
+
+{% endblock %}

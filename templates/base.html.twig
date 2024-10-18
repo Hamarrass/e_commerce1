@@ -17,8 +17,9 @@
 		<link href="{{ asset('/assets/css/carousel.css') }}" rel="stylesheet">
 		<link href="{{ asset('/assets/css/maboutique.css') }}" rel="stylesheet">
 		<link href="{{ asset('/assets/css/snackbarStyle.css') }}" rel="stylesheet">
-		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">
-		
+		<link
+		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">
+
 
 		<!-- JavaScript Links -->
 		<script src="{{ asset('js/fos_js_routes.js') }}"></script>
@@ -192,19 +193,20 @@
 							</li>
 						</ul>
 
-						{% if app.user %}
-							<ul class="navbar-nav mb-2 mb-md-0 d-flex">
+						<ul class="navbar-nav mb-2 mb-md-0 d-flex">
+							<li class="nav-item">
+								<a class="nav-link" aria-current="page" href="{{ path('app_cart') }}">
+									<i class="fa-solid fa-cart-shopping"></i>
+								</a>
+							</li>
+							{% if app.user %}
+								<li class="nav-item">
+									<a class="nav-link" aria-current="page" href="{{ path('app_account') }}">Mon Compte {{app.user.firstname}}</a>
+								</li>
 								<li class="nav-item">
 									<a class="nav-link" aria-current="page" href="{{ path('app_logout') }}">Deconnexion</a>
 								</li>
-							</ul>
-						{% else %}
-							<ul class="navbar-nav mb-2 mb-md-0 d-flex">
-								<li class="nav-item">
-									<a class="nav-link" aria-current="page" href="{{ path('app_cart') }}">
-										<i class="fa-solid fa-cart-shopping"></i>
-									</a>
-								</li>
+							{% else %}
 								<li class="nav-item">
 									<a class="nav-link" aria-current="page" href="{{ path('app_login') }}">Connexion</a>
 								</li>
@@ -216,15 +218,12 @@
 					</div>
 				</div>
 			</nav>
-		</header>
+		</body>
+	</body>
+</html></header><!-- Carousel Block -->{% block myCarousel %}{% endblock %}<div class="container mt-5"> {% block body %}{% endblock %}
 
-		<!-- Carousel Block -->
-		{% block myCarousel %}{% endblock %}
-
-		<div class="container"> {% block body %}{% endblock %}
-
-			<!-- Footer -->
-			{# <footer class="container">
+<!-- Footer -->
+{# <footer class="container">
 				<p class="float-end">
 					<a href="#">Back to top</a>
 				</p>
@@ -234,9 +233,7 @@
 					<a href="#">Terms</a>
 				</p>
 			</footer> #}
-		</div>
+</div>
 
-		<!-- Bootstrap JavaScript -->
-		<script src="{{ asset('/assets/js/bootstrap.bundle.min.js') }}"></script>
-	</body>
-</html>
+<!-- Bootstrap JavaScript -->
+<script src="{{ asset('/assets/js/bootstrap.bundle.min.js') }}"></script></body></html>
