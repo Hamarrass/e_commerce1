@@ -183,4 +183,9 @@ class Address
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->getAddress().'[br]'.$this->getCodePostal().'-'.$this->getCity().'-'.$this->getCountry();
+    }
 }

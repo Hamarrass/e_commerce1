@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Validation commande!{% endblock %}
+
+{% block body %}
+
+
+<h1>je valide ma commande</h1>
+
+<p>
+  Choisissiez votre adresse de livraison et transporteur
+</p>
+
+<div class="row">
+   <div class="col_md_6">
+      <p>Adress</p>
+       {% set forHtml %}
+        {{form(form)}}
+       {% endset %}  
+       {{ forHtml|replace({'[br]' : '<br>' }) |raw }}
+      <p>Transporteur</p>
+   </div>
+   <div class="col_md_6">
+     <p>Recaproduit</p>
+   </div>
+</div>
+{% endblock %}

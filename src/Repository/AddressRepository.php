@@ -19,17 +19,16 @@ class AddressRepository extends ServiceEntityRepository
     //    /**
     //     * @return Address[] Returns an array of Address objects
     //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('a')
-    //            ->andWhere('a.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('a.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+       public function getNonDeletedAddressByUserId($userId): array
+       {
+           return $this->createQueryBuilder('a')
+               ->andWhere('a.user = :userId')
+               ->setParameter('userId', $userId)
+               ->andWhere('a.isDeleted = false ')
+               ->getQuery()
+               ->getResult()
+           ;
+       }
 
     //    public function findOneBySomeField($value): ?Address
     //    {
